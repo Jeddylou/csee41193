@@ -52,8 +52,9 @@ public class srnode {
                     String info = new String(data, 0, packet.getLength());
                     if(info.charAt(0) != 'A' && info.charAt(0) != 'B') {
                         //I am a receiver, I will send ACK to the sender
-                        int realIndex = Integer.valueOf(info.substring(0, 4));
-                        String recData = info.substring(4);
+                        int length = info.length();
+                        int realIndex = Integer.valueOf(info.substring(0, length - 1));
+                        String recData = info.substring(length - 1);
                         if(recData.equals("$")) {
                             byte[] BCKdata = ("BCK" + realIndex).getBytes();
                             DatagramPacket BCKpacket = new DatagramPacket(BCKdata, BCKdata.length, address, remotePort);
@@ -204,7 +205,10 @@ public class srnode {
             i /= 10;
             current ++;
         }
-        if(current == 3) {
+        if(current == 4) {
+            sb.append(t);
+            sb.append(data);
+        } else if(current == 3) {
             sb.append("0");
             sb.append(t);
             sb.append(data);
