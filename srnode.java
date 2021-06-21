@@ -32,7 +32,7 @@ public class srnode {
             mode = false;
             p = Double.valueOf(paramArray[4]);
         }
-        String [] buffer = new String[2000];
+        String [] buffer = new String[10000];
         Arrays.fill(buffer, null);
         DatagramSocket socket = new DatagramSocket(localPort);
         new Thread(() -> {
@@ -131,16 +131,16 @@ public class srnode {
 //                    System.out.println("the buffer is full, please wait");
 //                    Thread.sleep(1000);
 //                }
-                if(index + 2000 > totalDatalength) {
+                if(index + 10000 > totalDatalength) {
                     for(int i = index; i < totalDatalength; i ++) {
-                        buffer[i%2000] = build(i, data.charAt(i));
+                        buffer[i%10000] = build(i, data.charAt(i));
                     }
                     index = totalDatalength;
                 } else {
                     for(int i = index; i < index + 2000; i ++) {
-                        buffer[i%2000] = build(i, data.charAt(i));
+                        buffer[i%10000] = build(i, data.charAt(i));
                     }
-                    index += 2000;
+                    index += 10000;
                 }
             }
             hasReceive = new boolean[index + 1];
