@@ -46,7 +46,7 @@ public class srnode {
             receiverHasDropped = new boolean[10000];
             while(true) {
                 try {
-                    byte[] data = new byte[5];
+                    byte[] data = new byte[7];
                     DatagramPacket packet = new DatagramPacket(data, data.length);
                     socket.receive(packet);
                     String info = new String(data, 0, packet.getLength());
@@ -229,4 +229,3 @@ public class srnode {
         return true;
     }
 }
-
